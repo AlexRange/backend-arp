@@ -25,11 +25,41 @@ class AuthController {
                     validator_1.default.isEmpty(password.trim())) {
                     const lstUsers = yield authModelo_1.default.getuserByEmail(email);
                     if (lstUsers.length <= 0) {
-                        return res.status(404).json({ message: "El usuario y/o contraseña es incorrecto", code: 1 });
+                        return res
+                            .status(404)
+                            .json({
+                            message: "El usuario y/o contraseña es incorrecto",
+                            code: 1,
+                        });
                     }
                     return res.json({ message: "Autenticación correcta", code: 0 });
                 }
                 return res.json({ message: "Autenticación correcta", code: 0 });
+            }
+            catch (error) {
+                return res.status(500).json({ message: `${error.message}` });
+            }
+        });
+    }
+    //Desafio ADD
+    addUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { email, password } = req.body;
+                // Verificar que el email no esté vacío y sea válido
+                if (!validator_1.default.isEmail(email)) {
+                    return res
+                        .status(400)
+                        .json({ message: "El email proporcionado no es válido", code: 1 });
+                }
+                // Verificar si ya existe un usuario con el mismo email
+                const existingUser = yield authModelo_1.default.getuserByEmail(email);
+                if (existingUser.length > 0) {
+                    return res
+                        .status(400)
+                        .json({ message: "Ya existe un usuario con este email", code: 1 });
+                }
+                return res.json({ message: "Usuario agregado correctamenting", code: 0 });
             }
             catch (error) {
                 return res.status(500).json({ message: `${error.message}` });

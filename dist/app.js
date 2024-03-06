@@ -8,6 +8,7 @@ const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_1 = __importDefault(require("express"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
+const usuarioRoutes_1 = __importDefault(require("./routes/usuarioRoutes"));
 /*
 * Clase de inicio de nuestra aplicacion NodeJsExpress
 * Autor: Alejandro Rangel Perez
@@ -37,7 +38,8 @@ class Server {
     }
     //Configura Las rutas
     routes() {
-        this.app.use("/", authRoutes_1.default);
+        this.app.use('/', authRoutes_1.default);
+        this.app.use('/usuario', usuarioRoutes_1.default);
     }
 }
 const server = new Server();

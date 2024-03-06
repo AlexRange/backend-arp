@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import express, {Application} from 'express';
 import authRoutes from './routes/authRoutes';
+import usuarioRoutes from './routes/usuarioRoutes';
 /*
 * Clase de inicio de nuestra aplicacion NodeJsExpress
 * Autor: Alejandro Rangel Perez
@@ -39,7 +40,8 @@ config(): void {
 
 //Configura Las rutas
 routes() {
-  this.app.use("/",authRoutes);
+  this.app.use('/',authRoutes)
+  this.app.use('/usuario', usuarioRoutes)
     }
 }
 const server = new Server();
