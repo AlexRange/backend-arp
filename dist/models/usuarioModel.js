@@ -51,6 +51,14 @@ class UsuarioModelo {
             return result;
         });
     }
+    findByEmail(email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield connection_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(" SELECT * FROM tbl_usuario WHERE email = ? ", [email]);
+            }));
+            return result;
+        });
+    }
 }
 const model = new UsuarioModelo();
 exports.default = model;

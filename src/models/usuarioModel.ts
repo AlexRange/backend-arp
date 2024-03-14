@@ -42,6 +42,15 @@ class UsuarioModelo {
         });
         return result;
     }
+
+    public async findByEmail(email: String) {
+        const result = await pool.then( async (connection) => {
+            return await connection.query(
+                " SELECT * FROM tbl_usuario WHERE email = ? ", [email]
+                );
+        });
+        return result;
+    }
 }
 const model = new UsuarioModelo();
 export default model;
